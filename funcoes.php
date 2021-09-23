@@ -25,13 +25,32 @@ function realizarLogin($usuario, $senha, $dados){
             header('location: area_restrita.php');
             exit;
 
-        } else {
-            
-            header('location: index.php');
-            exit;
-
         }
         
     }
 
+    header('location: index.php');
+
+}
+
+//FUNÇÃO DE VVERIFICAÇÃO DE LOGIN
+//VERIFICA SE O USUÁRIO PASSOU PELO PROCESSO DE LOGIN
+
+function verificarLogin(){
+
+    if($_SESSION["id"] != session_id() || (empty($_SESSION["id"])) ){
+
+        header('location: index.php');
+
+    }
+}
+
+//FUNÇÃO DE FINZALIZAÇÃO DE LOGIN
+//EFETUA A AÇÃO DE SAIR DO USUÁRIO DESTRUINDO A SESSÃO
+
+function finalizarLogin(){
+    session_unset(); //LIMPA TODAS A AVARIAVEIS DE SESSÃO
+    session_destroy(); //DESTRÓI A SESSÃO ATIVA
+
+    header('location: index.php');
 }
